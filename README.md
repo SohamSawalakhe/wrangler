@@ -175,6 +175,64 @@ rates below are specified as *records/second*.
 | High (167 Directives) |      426      | 127,946,398 |  82,677,845,324 | 106,367.27 |
 | High (167 Directives) |      426      | 511,785,592 | 330,711,381,296 | 105,768.93 |
 
+<<<<<<< HEAD
+=======
+## Byte Size and Time Duration Parsers
+
+The Wrangler library now supports native parsing and handling of byte sizes and time durations in recipes.
+
+### Byte Size Parser
+
+Supports parsing byte sizes with the following units:
+- B (bytes)
+- KB (kilobytes)
+- MB (megabytes)
+- GB (gigabytes)
+- TB (terabytes)
+- PB (petabytes)
+
+Example usage in recipes:
+```
+parse-as :size BYTE_SIZE
+```
+
+### Time Duration Parser
+
+Supports parsing time durations with the following units:
+- ns (nanoseconds)
+- ms (milliseconds)
+- s (seconds)
+- m (minutes)
+- h (hours)
+- d (days)
+
+Example usage in recipes:
+```
+parse-as :duration TIME_DURATION
+```
+
+### Aggregate Stats Directive
+
+The new `aggregate-stats` directive allows aggregating byte sizes and time durations:
+
+```
+aggregate-stats :size_column :time_column :total_size_column :total_time_column
+```
+
+Optional arguments:
+- `:output_size_unit` - Output unit for size (B, KB, MB, GB, TB, PB)
+- `:output_time_unit` - Output unit for time (ns, ms, s, m, h, d)
+
+Example:
+```
+aggregate-stats :data_transfer_size :response_time total_size_mb total_time_sec
+```
+
+This will:
+1. Sum all data transfer sizes and convert to MB
+2. Sum all response times and convert to seconds
+3. Store results in the specified output columns
+>>>>>>> develop/master
 
 ## Contact
 
